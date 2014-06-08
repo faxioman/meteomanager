@@ -1,1 +1,26 @@
-<div class="page-header"><h1><i class="fa fa-map-marker"></i>&nbsp;&nbsp;Country detail</h1></div><!-- trick: Angular-bootstrap add "nav-<type>" string to ul class --><tabset type="tabs nav-tabs-simple"><tab ng-repeat="country in countries" heading="{{country.name}}" active="country.active" disabled><div class="stat-panel" ng-if="country.active"><div class="stat-row"><div class="stat-cell bg-info padding-sm" style="height: 250px" mm-chart-area-range="{range: country.data.ranges, average: country.data.averages, title: country.data.title, color: '#ffffff'}"></div></div><div class="stat-row"><div class="stat-counters bordered no-border-t text-center"><div class="stat-cell col-xs-3 padding-sm no-padding-hr">uno</div><div class="stat-cell col-xs-3 padding-sm no-padding-hr">due</div><div class="stat-cell col-xs-3 padding-sm no-padding-hr">tre</div><div class="stat-cell col-xs-3 padding-sm no-padding-hr">quattro</div></div></div></div></tab></tabset>
+<div class="page-header"><h1><i class="fa fa-map-marker"></i>&nbsp;&nbsp;Country detail</h1></div><!-- trick: Angular-bootstrap add "nav-<type>" string to ul class --><tabset type="tabs nav-tabs-simple"><tab ng-repeat="country in countries" heading="{{country.name}}" active="country.active" disabled><tabset type="tabs nav-tabs-xs pull-right no-border uppercase"><tab ng-repeat="cdata in country.data" heading="{{cdata.shortTitle}}" active="cdata.active" ng-if="country.active"><!-- dirty pull-right fix --><div style="margin-top:12px" class="stat-panel" ng-if="cdata.active"><div class="stat-row"><div class="stat-cell bg-{{ cdata.type }} padding-sm" style="height: 300px" mm-chart-area-range="{
+                            range: cdata.ranges,
+                            average: cdata.averages,
+                            title: cdata.title,
+                            color: '#ffffff',
+                            tooltip: true,
+                            showXLabels: true,
+                            xtype: 'datetime',
+                            tooltipFormat: '_x_<br /><strong>_y_' + cdata.measureUnit + '</strong>',
+                            zoom: 'x'
+                        }"></div></div><!--div class="stat-row">
+                        <div class="stat-counters bordered no-border-t text-center">
+                            <div class="stat-cell col-xs-3 padding-sm no-padding-hr">
+                                uno
+                            </div>
+                            <div class="stat-cell col-xs-3 padding-sm no-padding-hr">
+                                due
+                            </div>
+                            <div class="stat-cell col-xs-3 padding-sm no-padding-hr">
+                                tre
+                            </div>
+                            <div class="stat-cell col-xs-3 padding-sm no-padding-hr">
+                                quattro
+                            </div>
+                        </div>
+                    </div--></div></tab></tabset></tab></tabset><div class="row"><div class="col-md-6"><div class="panel"><div class="panel-heading"><h4 class="panel-title">TODO <span class="text-light-gray">/ Data Table</span></h4></div><div class="panel-body"><p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?</p></div></div></div><div class="col-md-6"><div class="panel"><div class="panel-heading"><h4 class="panel-title">EU <span class="text-light-gray">/ Temperature Anomaly</span></h4></div><div class="panel-body"><div mm-chart-choropleth="" style="height: 400px; min-width: 210px; max-width: 500px; margin: 0 auto"></div></div></div></div></div>
